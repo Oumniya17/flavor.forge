@@ -1,0 +1,116 @@
+{% extends 'recipes/base.html' %}
+
+{% block content %}
+
+<h1 class="mb-4">Recipe Statistics</h1>
+
+<div class="row">
+
+<div class="col-md-6 mb-4">
+<div class="card shadow p-4">
+<h5>Recipes by Difficulty</h5>
+<canvas id="difficultyChart"></canvas>
+</div>
+</div>
+
+<div class="col-md-6 mb-4">
+<div class="card shadow p-4">
+<h5>Recipes by User</h5>
+<canvas id="userChart"></canvas>
+</div>
+</div>
+
+<div class="col-md-6 mb-4">
+<div class="card shadow p-4">
+<h5>Recipes per Month</h5>
+<canvas id="monthChart"></canvas>
+</div>
+</div>
+
+<div class="col-md-6 mb-4">
+<div class="card shadow p-4">
+<h5>Most Used Ingredients</h5>
+<canvas id="ingredientChart"></canvas>
+</div>
+</div>
+
+<div class="col-md-6 mb-4">
+<div class="card shadow p-4">
+<h5>Experiments per Recipe</h5>
+<canvas id="experimentChart"></canvas>
+</div>
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+new Chart(document.getElementById('difficultyChart'), {
+type: 'bar',
+data: {
+labels: {{ difficulty_labels|safe }},
+datasets: [{
+label: 'Recipes',
+data: {{ difficulty_data|safe }},
+backgroundColor: '#ff6b81'
+}]
+}
+});
+
+
+new Chart(document.getElementById('userChart'), {
+type: 'pie',
+data: {
+labels: {{ user_labels|safe }},
+datasets: [{
+data: {{ user_data|safe }},
+backgroundColor: ['#ff6b81','#ff9f43','#1dd1a1','#54a0ff','#5f27cd']
+}]
+}
+});
+
+
+new Chart(document.getElementById('monthChart'), {
+type: 'line',
+data: {
+labels: {{ month_labels|safe }},
+datasets: [{
+label: 'Recipes',
+data: {{ month_data|safe }},
+borderColor: '#54a0ff',
+fill: false
+}]
+}
+});
+
+
+new Chart(document.getElementById('ingredientChart'), {
+type: 'bar',
+data: {
+labels: {{ ingredient_labels|safe }},
+datasets: [{
+label: 'Usage',
+data: {{ ingredient_data|safe }},
+backgroundColor: '#1dd1a1'
+}]
+}
+});
+
+
+new Chart(document.getElementById('experimentChart'), {
+type: 'bar',
+data: {
+labels: {{ experiment_labels|safe }},
+datasets: [{
+label: 'Experiments',
+data: {{ experiment_data|safe }},
+backgroundColor: '#5f27cd'
+}]
+}
+});
+
+</script>
+
+{% endblock %}

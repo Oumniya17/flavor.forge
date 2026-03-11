@@ -1,0 +1,53 @@
+{% extends 'recipes/base.html' %}
+
+{% block content %}
+
+<h1 class="mb-4">🏆 Top Recipes</h1>
+
+<div class="row">
+
+{% for recipe in recipes %}
+
+<div class="col-md-4 mb-4">
+
+<div class="card recipe-card shadow h-100">
+
+{% if recipe.image %}
+<img src="{{ recipe.image.url }}" class="card-img-top" alt="Recipe image">
+{% else %}
+<img src="https://loremflickr.com/800/500/food,{{ recipe.title|urlencode }}"
+     class="card-img-top"
+     alt="{{ recipe.title }}">
+{% endif %}
+<div class="card-body text-center">
+
+{% if forloop.counter == 1 %}
+<h2>🥇</h2>
+{% elif forloop.counter == 2 %}
+<h2>🥈</h2>
+{% elif forloop.counter == 3 %}
+<h2>🥉</h2>
+{% endif %}
+
+<h5 class="card-title">{{ recipe.title }}</h5>
+
+<p class="text-muted">
+Experiments: {{ recipe.experiment_count }}
+</p>
+
+<a href="{% url 'recipe_detail' recipe.pk %}"
+class="btn btn-primary w-100">
+View Recipe
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

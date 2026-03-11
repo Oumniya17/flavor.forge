@@ -1,0 +1,51 @@
+{% extends 'recipes/base.html' %}
+
+{% block content %}
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+
+<h1 class="mb-4">➕ Add Ingredient</h1>
+
+<div class="card recipe-card shadow p-4">
+
+<form method="post">
+
+{% csrf_token %}
+
+<div class="mb-3">
+<label class="form-label">Ingredient</label>
+{{ form.ingredient }}
+</div>
+
+<div class="mb-3">
+<label class="form-label">Quantity</label>
+{{ form.quantity }}
+</div>
+
+<div class="mb-3">
+<label class="form-label">Unit</label>
+{{ form.unit }}
+</div>
+
+<button type="submit" class="btn btn-primary">
+Add Ingredient
+</button>
+
+</form>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    $('#id_ingredient').select2({
+        placeholder: "Search ingredient...",
+        width: '100%'
+    });
+});
+</script>
+
+{% endblock %}
